@@ -9,7 +9,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/folder/:id',
     component: () => import ('../views/FolderPage.vue')
-  }
+  },
+  {
+    path: '/home',
+    component: () => import ('../views/core/homepage.vue')
+  },
+ 
+
 ]
 
 const router = createRouter({

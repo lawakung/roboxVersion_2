@@ -1,3 +1,7 @@
+
+โพสต์โดย theerakorn kaewkham
+theerakorn kaewkham
+สร้างเมื่อ 14:2414:24
 <template>
   <ion-app>
     <ion-split-pane content-id="main-content">
@@ -67,13 +71,20 @@ const selectedIndex = ref(0);
 const appPages = [
   {
     title: 'Inbox',
-    url: '/folder/Inbox',
+    url: '/home',
     iosIcon: mailOutline,
     mdIcon: mailSharp,
   },
+   {
+    title: 'Home',
+    url: '/home',
+    iosIcon: paperPlaneOutline,
+    mdIcon: paperPlaneSharp,
+  },
+
   {
     title: 'Outbox',
-    url: '/folder/Outbox',
+    url: '/home',
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp,
   },
