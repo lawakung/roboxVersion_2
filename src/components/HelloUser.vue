@@ -12,7 +12,7 @@ export default {
   name: 'HelloUser.vue',
   data() {
     return {
-      name: 'นักเรียน',
+      name: '',
     }
   }
 }

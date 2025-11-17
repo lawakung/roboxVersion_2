@@ -67,13 +67,13 @@ const cart = ref([])
 const products = ref([
     {
         id: 1,
-        title: 'หมวกกันน็อก X-CRUZE',
-        short: 'แข็งแรง ดุดัน น้ำหนักเบา',
-        long: 'หมวกกันน็อกรุ่น X-CRUZE ทำจากคาร์บอนไฟเบอร์ ให้ความปลอดภัยสูงสุด พร้อมแผ่นระบายอากาศที่ออกแบบเฉพาะทางสำหรับความเร็วสูง',
-        price: 2590,
+        title: 'Robux',
+        short: 'ไม่บอก',
+        long: 'จ่าย 300 ได้ 3000 โรบัค',
+        price: 300,
         badge: 'ฮอต',
-        image: 'https://picsum.photos/seed/helmet/400/300',
-        imageLarge: 'https://picsum.photos/seed/helmet/900/600',
+        image: 'https://image.castle.xyz/f08b51fb28f704b056047699c78b286d?w=256&h=256&format=png8',
+        imageLarge: 'https://image.castle.xyz/f08b51fb28f704b056047699c78b286d?w=256&h=256&format=png8',
         tagline: 'สุดโหดสำหรับสายสปีด'
     },
     {
@@ -127,11 +127,11 @@ const filteredAndSorted = computed(() => {
 
 <style scoped>
 :root{
-    --bg:#0b0c10;
-    --card:#0f1115;
+    --bg:#0026ff;
+    --card:#00ffdd;
     --accent:#ff2d55;
-    --muted:#9aa1a8;
-    --glass: rgba(255,255,255,0.03);
+    --muted:#ffffff;
+    --glass: rgb(255, 250, 250);
 }
 
 .page{
@@ -183,17 +183,17 @@ const filteredAndSorted = computed(() => {
 }
 
 .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-    border:1px solid rgba(255,255,255,0.03);
+    background:linear-gradient(180deg, rgb(255, 255, 255), rgba(0,0,0,0.12));
+    border:1px solid rgb(243, 241, 241);
     border-radius:12px;
     overflow:hidden;
     cursor:pointer;
     transition:transform .18s ease, box-shadow .18s ease;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    box-shadow: 0 8px 30px rgb(255, 255, 255);
 }
 .card:hover{
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+    box-shadow: 0 18px 40px rgb(255, 255, 255);
 }
 .img-wrap{ position:relative; height:140px; overflow:hidden; }
 .img-wrap img{ width:100%; height:100%; object-fit:cover; transform:scale(1.05); transition:transform .5s; }
@@ -203,7 +203,7 @@ const filteredAndSorted = computed(() => {
     position:absolute; top:10px; left:10px;
     background:linear-gradient(90deg,var(--accent), #ff6b81);
     padding:6px 8px; border-radius:8px; font-weight:700; font-size:.75rem;
-    box-shadow:0 6px 18px rgba(255,45,85,0.12);
+    box-shadow:0 6px 18px rgb(255, 255, 255);
 }
 
 .info{ padding:12px; color:#e7eef7; }
@@ -213,7 +213,7 @@ const filteredAndSorted = computed(() => {
 .meta{ display:flex; align-items:center; justify-content:space-between; margin-top:10px; gap:10px; }
 .price{ color:var(--accent); font-size:1.05rem; }
 .btn-ghost{
-    background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted);
+    background:transparent; border:1px solid rgb(255, 255, 255); color:var(--muted);
     padding:6px 10px; border-radius:8px; cursor:pointer;
 }
 .btn-ghost:hover{ border-color:rgba(255,45,85,0.45); color:var(--accent) }
@@ -221,18 +221,18 @@ const filteredAndSorted = computed(() => {
 /* overlay modal */
 .overlay{
     position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-    background:linear-gradient(180deg, rgba(2,2,2,0.6), rgba(2,2,2,0.85));
+    background:linear-gradient(180deg, rgb(0, 0, 0), rgb(255, 255, 255));
     z-index:60;
     padding:24px;
 }
 .modal{
     width:min(1100px, 96%);
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+    background:linear-gradient(180deg, rgb(0, 0, 0), rgb(0, 0, 0));
     border-radius:14px;
-    border:1px solid rgba(255,255,255,0.04);
+    border:1px solid rgb(0, 0, 0);
     overflow:hidden;
     position:relative;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    box-shadow: 0 30px 80px rgba(255, 255, 255, 0.527);
 }
 .close{
     position:absolute; top:10px; right:10px; background:transparent; border:none; color:var(--muted);
@@ -242,7 +242,7 @@ const filteredAndSorted = computed(() => {
     display:flex; gap:20px; padding:20px; align-items:stretch;
 }
 .big{ width:50%; height:420px; object-fit:cover; border-radius:10px; box-shadow:0 12px 40px rgba(0,0,0,0.6); }
-.details{ flex:1; color:#f3f7fb; display:flex; flex-direction:column; justify-content:space-between; }
+.details{ flex:1; color:#ffffff; display:flex; flex-direction:column; justify-content:space-between; }
 .details h2{ margin:0 0 6px 0; color:var(--accent); }
 .tagline{ color:var(--muted); margin-bottom:12px; }
 .long{ color:#d6e0ea; line-height:1.5; }
