@@ -2,6 +2,15 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
+
+        <!-- ปุ่มกลับหน้า Home -->
+        <ion-buttons slot="start">
+          <ion-button @click="goHome">
+            <ion-icon name="home-outline"></ion-icon>
+            กลับหน้าแรก
+          </ion-button>
+        </ion-buttons>
+
         <ion-title>⚙️ การตั้งค่าและข้อมูลส่วนตัว</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -28,7 +37,7 @@
         </ion-card-content>
       </ion-card>
 
-      <!-- การตั้งค่าระบบ -->
+      <!-- การตั้งค่าแอป -->
       <ion-card class="ion-margin-top">
         <ion-card-header>
           <ion-card-title>การตั้งค่าแอป</ion-card-title>
@@ -44,12 +53,14 @@
       <!-- แสดงสถานะปัจจุบัน -->
       <ion-list class="ion-margin-top">
         <ion-list-header>สถานะปัจจุบัน</ion-list-header>
+
         <ion-item>
           <ion-label>
             <h3>ชื่อผู้ใช้ที่บันทึกไว้:</h3>
             <p><strong>{{ savedUserName || 'ไม่มีข้อมูล' }}</strong></p>
           </ion-label>
         </ion-item>
+
         <ion-item>
           <ion-label>
             <h3>สถานะ Dark Mode:</h3>
@@ -66,29 +77,35 @@
   </ion-page>
 </template>
 
+
+
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { Preferences } from '@capacitor/preferences';
+import { useRouter } from 'vue-router';
 
 import { 
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardTitle, IonCardContent,
   IonItem, IonInput, IonButton, IonToggle, IonLabel,
-  IonList, IonListHeader
+  IonList, IonListHeader, IonButtons, IonIcon
 } from '@ionic/vue';
 
 
-// =========================
-// STATE (Reactive)
-// =========================
+// Router สำหรับปุ่มกลับหน้า Home
+const router = useRouter();
+const goHome = () => {
+  router.push('/home'); // ← แก้ path ตามโครงสร้างโปรเจกต์ของคุณ
+};
+
+
+// ตัวแปร
 const userNameInput = ref('');
 const savedUserName = ref('');
 const isDarkMode = ref(false);
 
 
-// =========================
-// 1. บันทึกชื่อผู้ใช้
-// =========================
+// ฟังก์ชันบันทึกชื่อ
 const saveUserName = async () => {
   if (!userNameInput.value) return;
 
@@ -102,50 +119,38 @@ const saveUserName = async () => {
 };
 
 
-// =========================
-// 2. สลับ Dark Mode
-// =========================
+// ฟังก์ชันเปิด/ปิด Dark Mode
 const toggleDarkMode = async (event: CustomEvent) => {
   const isChecked = event.detail.checked;
   isDarkMode.value = isChecked;
 
-  // บันทึกลง Preferences
   await Preferences.set({
     key: 'darkModeState',
     value: isChecked.toString(),
   });
 
-  // เปลี่ยนธีมจริงใน Ionic
   document.body.classList.toggle('dark', isChecked);
 
   console.log('Dark Mode Toggled:', isChecked);
 };
 
 
-// =========================
-// 3. โหลดค่าต่าง ๆ เมื่อเปิดหน้า
-// =========================
+// โหลดค่าที่เคยตั้งไว้
 const loadPreferences = async () => {
-  
-  // โหลดชื่อผู้ใช้
   const { value: storedName } = await Preferences.get({ key: 'userName' });
   if (storedName) {
     savedUserName.value = storedName;
     userNameInput.value = storedName;
   }
 
-  // โหลด Dark Mode
   const { value: storedMode } = await Preferences.get({ key: 'darkModeState' });
   isDarkMode.value = storedMode === 'true';
 
-  // หากมีการเปิด Dark Mode ไว้ ให้เปิดทันที
   document.body.classList.toggle('dark', isDarkMode.value);
 };
 
 
-// =========================
-// 4. ล้างข้อมูลทั้งหมด
-// =========================
+// ฟังก์ชันล้างข้อมูลทั้งหมด
 const clearAllData = async () => {
   await Preferences.clear();
 
@@ -153,13 +158,12 @@ const clearAllData = async () => {
   userNameInput.value = '';
   isDarkMode.value = false;
 
-  // ปิด Dark Mode ในหน้า
   document.body.classList.remove('dark');
 
   console.log('All Preferences Cleared');
 };
 
 
-// โหลดข้อมูลทันทีเมื่อหน้าเปิด
+// ทำงานตอนเปิดหน้า
 onMounted(loadPreferences);
 </script>
