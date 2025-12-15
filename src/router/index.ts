@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import MainLayout from '@/layouts/MainLayout.vue'
+import PostsPage from '../views/PostsPage.vue' // ✅ เพิ่ม import
 
 const routes = [
   {
@@ -8,7 +9,12 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/home'
+        redirect: '/posts' // ✅ ให้เปิดแอปมาเจอหน้า Posts ก่อน
+      },
+      {
+        path: 'posts',
+        name: 'Posts',
+        component: PostsPage
       },
       {
         path: 'home',
@@ -23,8 +29,7 @@ const routes = [
         component: () => import('../views/core/contact.vue')
       }
     ]
-  },
- 
+  }
 ]
 
 const router = createRouter({
