@@ -1,151 +1,135 @@
 <template>
-  <ion-page>
+  <ion-page class="dark-bg">
     <ion-header>
-      <ion-toolbar class="header-bar">
-        <ion-title class="glow-text">🌌 Products</ion-title>
+      <ion-toolbar class="toolbar">
+        <ion-title class="title">สินค้า</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding neon-background">
-      <ion-list class="product-list">
-        <ion-item
-          v-for="product in products"
-          :key="product.id"
-          class="product-item"
-        >
-          <ion-thumbnail slot="start" class="neon-thumbnail">
-            <img :src="product.image" :alt="product.name" />
-          </ion-thumbnail>
+    <ion-content fullscreen class="ion-padding">
 
-          <ion-label class="product-info">
-            <h2 class="product-name">{{ product.name }}</h2>
-            <p class="product-desc">{{ product.description }}</p>
-            <p class="price">${{ product.price }}</p>
-          </ion-label>
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            size="6"
+            v-for="product in products"
+            :key="product.id"
+          >
+            <ion-card class="product-card neon">
+              <ion-img :src="product.image" />
 
-          <ion-button class="neon-button" slot="end" @click="buyProduct(product)">
-            Buy
-          </ion-button>
-        </ion-item>
-      </ion-list>
+              <ion-card-content>
+                <h3 class="name">{{ product.name }}</h3>
+                <p class="price">฿{{ product.price }}</p>
+
+                <ion-button
+                  size="small"
+                  expand="block"
+                  class="btn-neon"
+                  @click="goToDetail(product.id)"
+                >
+                  ดูรายละเอียด
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-content>
   </ion-page>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
 import {
   IonPage,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonContent,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonThumbnail,
-  IonButton
-} from '@ionic/vue'
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardContent,
+  IonButton,
+  IonImg
+} from '@ionic/vue';
 
-const products = ref([
-  { id: 1, name: 'Product 1', description: 'Description 1', price: 29.99, image: 'https://via.placeholder.com/100' },
-  { id: 2, name: 'Product 2', description: 'Description 2', price: 39.99, image: 'https://via.placeholder.com/100' },
-  { id: 3, name: 'Product 3', description: 'Description 3', price: 49.99, image: 'https://via.placeholder.com/100' }
-])
+import { useRouter } from 'vue-router';
 
-const buyProduct = (product) => {
-  console.log('Purchased:', product.name)
-}
+const router = useRouter();
+
+const products = [
+  { id: 1, name: 'หูฟัง X100', price: 1590, image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f' },
+  { id: 2, name: 'เมาส์ RGB', price: 890, image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3' },
+  { id: 3, name: 'คีย์บอร์ด', price: 1990, image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8' },
+  { id: 4, name: 'ลำโพง', price: 1290, image: 'https://images.unsplash.com/photo-1585386959984-a4155228f1a2' }
+];
+
+const goToDetail = (id: number) => {
+  router.push(`/product/${id}`);
+};
 </script>
 
 <style scoped>
-
-/* --------------------
-   พื้นหลัง + Header
--------------------- */
-.neon-background {
-  --background: #0a0f1c;
+/* พื้นหลังดำสนิท */
+.dark-bg {
+  --background: #000000;
 }
 
-.header-bar {
-  --background: #0d1326;
-  border-bottom: 1px solid #00eaff70;
+/* Toolbar */
+.toolbar {
+  --background: #000000;
+  border-bottom: 1px solid #0ff;
 }
 
-.glow-text {
-  color: #00eaff;
-  text-shadow: 0 0 12px #00eaff, 0 0 22px #00eaff;
+.title {
+  color: #38bdf8;
+  text-shadow: 0 0 8px #38bdf8;
+  font-weight: bold;
 }
 
-/* --------------------
-   รายการสินค้า
--------------------- */
-.product-list {
-  background: transparent;
-}
-
-.product-item {
-  --background: #111826;
-  margin-bottom: 18px;
+/* Card Neon */
+.product-card {
+  background: #020617;
   border-radius: 14px;
-  border: 1px solid #00eaff60;
-  box-shadow: 0 0 12px #00eaff30;
-  backdrop-filter: blur(6px);
-  transition: 0.2s;
+  overflow: hidden;
 }
 
-.product-item:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 18px #00eaff80;
+.neon {
+  box-shadow:
+    0 0 8px rgba(56,189,248,0.6),
+    0 0 20px rgba(56,189,248,0.4);
 }
 
-/* --------------------
-    Thumbnail Neon
--------------------- */
-.neon-thumbnail img {
-  border-radius: 8px;
-  box-shadow: 0 0 10px #00eaffaa;
+ion-img {
+  height: 110px;
+  object-fit: cover;
 }
 
-/* --------------------
-    Text Styles
--------------------- */
-.product-info {
-  color: white;
-}
-
-.product-name {
-  font-size: 1.3rem;
+/* Text */
+.name {
+  font-size: 14px;
   font-weight: 600;
-  color: #00eaff;
-  text-shadow: 0 0 6px #00eaff90;
-}
-
-.product-desc {
-  opacity: 0.7;
+  color: #e5e7eb;
+  margin-bottom: 4px;
 }
 
 .price {
-  font-weight: bold;
-  color: #00eaff;
-  text-shadow: 0 0 10px #00eaff;
-  font-size: 1.2rem;
+  font-size: 14px;
+  color: #38bdf8;
+  text-shadow: 0 0 6px #38bdf8;
+  margin-bottom: 8px;
 }
 
-/* --------------------
-   ปุ่มเรืองแสง (Neon)
--------------------- */
-.neon-button {
-  --background: #00eaff;
-  --color: #000;
-  font-weight: bold;
+/* Neon Button */
+.btn-neon {
+  --background: transparent;
+  --color: #38bdf8;
+  border: 1px solid #38bdf8;
   border-radius: 10px;
-  box-shadow: 0 0 15px #00eaff, 0 0 30px #00eaff80;
-  transition: 0.25s;
-}
-
-.neon-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 25px #00eaff, 0 0 50px #00eaff;
+  text-shadow: 0 0 6px #38bdf8;
+  box-shadow: 0 0 10px rgba(56,189,248,0.6);
 }
 </style>

@@ -1,21 +1,33 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import MainLayout from '@/layouts/MainLayout.vue'
-import PostsPage from '../views/PostsPage.vue' // ✅ เพิ่ม import
+import PostsPage from '../views/PostsPage.vue'
 
 const routes = [
   {
     path: '/',
     component: MainLayout,
     children: [
+      // ✅ เปิดแอปมาเจอ DebugPage
       {
         path: '',
-        redirect: '/posts' // ✅ ให้เปิดแอปมาเจอหน้า Posts ก่อน
+        redirect: '/debug'
       },
+
+      // ✅ Debug Page (หน้าทดสอบ Bug)
+      {
+        path: 'debug',
+        name: 'Debug',
+        component: () => import('../views/DebugPage.vue')
+      },
+
+      // หน้า Posts
       {
         path: 'posts',
         name: 'Posts',
         component: PostsPage
       },
+
+      // หน้าอื่น ๆ
       {
         path: 'home',
         component: () => import('../views/core/homepage.vue')

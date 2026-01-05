@@ -42,6 +42,6 @@ import {
 } from '@ionic/vue';
 import { useRoute } from 'vue-router'; // ใช้งานเพื่อเข้าถึง Route Parameter
 
-const route = useRoute(); // สร้าง instance ของ route
-const productId = route.params.id; // ดึงค่า 'id' จาก URL Parameter
+const route = useRoute();
+const productId = route.params.id;
 </script>
