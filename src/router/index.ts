@@ -1,26 +1,37 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from '@ionic/vue-router'
 import MainLayout from '@/layouts/MainLayout.vue'
-import PostsPage from '../views/PostsPage.vue'
 
-const routes = [
+// Pages
+import PostsPage from '../views/PostsPage.vue'
+import CameraPage from '../views/CameraPage.vue'
+import LocationPage from '../views/LocationPage.vue'
+
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: MainLayout,
     children: [
-      // ✅ เปิดแอปมาเจอ DebugPage
+      // 👉 เปิดแอปมาเจอ CameraPage
       {
         path: '',
-        redirect: '/debug'
+        redirect: '/camera'
       },
 
-      // ✅ Debug Page (หน้าทดสอบ Bug)
+      // Camera Page
       {
-        path: 'debug',
-        name: 'Debug',
-        component: () => import('../views/DebugPage.vue')
+        path: 'camera',
+        name: 'Camera',
+        component: CameraPage
       },
 
-      // หน้า Posts
+      // Location Page
+      {
+        path: 'location',
+        name: 'Location',
+        component: LocationPage
+      },
+
+      // Posts Page
       {
         path: 'posts',
         name: 'Posts',
