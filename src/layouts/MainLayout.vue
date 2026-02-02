@@ -69,11 +69,6 @@ const appPages = [
     title: 'Cantact',
     url: '/Contact',
     icon: cubeOutline,
-  },
-  {
-    title: 'addpage',
-    url: '/addpage',
-    icon: cubeOutline,
   }
 ]
 </script>
