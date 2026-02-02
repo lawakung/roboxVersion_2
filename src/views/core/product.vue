@@ -1,13 +1,23 @@
 <template>
-  <ion-page class="dark-bg">
+  <ion-page>
     <ion-header>
-      <ion-toolbar class="toolbar">
-        <ion-title class="title">สินค้า</ion-title>
+      <ion-toolbar class="header-bar">
+        <!-- Back to Home -->
+   <ion-buttons slot="start">
+  <ion-button
+    router-link="/home"
+    fill="clear"
+    class="back-btn"
+  >
+    ⬅ Home
+  </ion-button>
+</ion-buttons>
+
+        <ion-title class="glow-text">🛒 สินค้า</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content fullscreen class="ion-padding">
-
+    <ion-content fullscreen class="ion-padding neon-background">
       <ion-grid>
         <ion-row>
           <ion-col
@@ -25,7 +35,7 @@
                 <ion-button
                   size="small"
                   expand="block"
-                  class="btn-neon"
+                  class="neon-button"
                   @click="goToDetail(product.id)"
                 >
                   ดูรายละเอียด
@@ -35,7 +45,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
     </ion-content>
   </ion-page>
 </template>
@@ -53,54 +62,86 @@ import {
   IonCard,
   IonCardContent,
   IonButton,
-  IonImg
-} from '@ionic/vue';
+  IonImg,
+  IonButtons,
+  IonBackButton
+} from '@ionic/vue'
 
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
+const router = useRouter()
 
 const products = [
-  { id: 1, name: 'หูฟัง X100', price: 1590, image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f' },
-  { id: 2, name: 'เมาส์ RGB', price: 890, image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3' },
-  { id: 3, name: 'คีย์บอร์ด', price: 1990, image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8' },
-  { id: 4, name: 'ลำโพง', price: 1290, image: 'https://images.unsplash.com/photo-1585386959984-a4155228f1a2' }
-];
+  {
+    id: 1,
+    name: 'เมาส์เกมมิ่ง RGB',
+    price: 590,
+    image: 'https://image.made-in-china.com/202f0j00ocebFOkCpAqT/T-Wolf-G590-USB-Wired-Gaming-Mouse-RGB-Light-800-7200dpi-ABS-Computer-Laptop-Mice.webp'
+  },
+  {
+    id: 2,
+    name: 'คีย์บอร์ด Mechanical',
+    price: 1250,
+    image: 'https://ihcupload.s3.ap-southeast-1.amazonaws.com/article/173133334067320cdc73c0f.jpeg'
+  },
+  {
+    id: 3,
+    name: 'หูฟัง Marshall Monitor III A.N.C Black',
+    price: 3200,
+    image: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRkHnZdvRBDzRjFzqayBqP-bi6XwJzpyGwT4WIDEeY6B_VKsbFvF0R-NQXDexlAaM2jfy6uTe-JsbLC1x1x92-RJo0D2M9PDizPvQBQei5rRJRTdwkJicbVqA'
+  },
+  {
+    id: 4,
+    name: 'NVIDIA GeForce RTX 5090',
+    price: 1290,
+    image: 'https://images.droidsans.com/wp-content/uploads/2024/09/RTX5090-HERO-1-1536x799-1-1024x533.jpg'
+  }
+]
 
 const goToDetail = (id: number) => {
-  router.push(`/product/${id}`);
-};
+  router.push(`/product/${id}`)
+}
 </script>
 
 <style scoped>
-/* พื้นหลังดำสนิท */
-.dark-bg {
-  --background: #000000;
+/* Background */
+.neon-background {
+  --background: #0a0f1c;
 }
 
-/* Toolbar */
-.toolbar {
-  --background: #000000;
-  border-bottom: 1px solid #0ff;
+/* Header */
+.header-bar {
+  --background: #0d1326;
+  border-bottom: 1px solid #00eaff80;
 }
 
-.title {
-  color: #38bdf8;
-  text-shadow: 0 0 8px #38bdf8;
+.glow-text {
+  color: #00eaff;
+  text-shadow: 0 0 12px #00eaff, 0 0 24px #00eaff;
   font-weight: bold;
 }
 
-/* Card Neon */
+/* Back button */
+.back-btn {
+  --color: #00eaff;
+  text-shadow: 0 0 6px #00eaffaa;
+}
+
+/* Card */
 .product-card {
-  background: #020617;
-  border-radius: 14px;
+  background: #111826;
+  border-radius: 16px;
   overflow: hidden;
+  transition: 0.25s;
 }
 
 .neon {
-  box-shadow:
-    0 0 8px rgba(56,189,248,0.6),
-    0 0 20px rgba(56,189,248,0.4);
+  box-shadow: 0 0 18px #00eaff40;
+}
+
+.product-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 0 30px #00eaff, 0 0 60px #00eaff80;
 }
 
 ion-img {
@@ -118,18 +159,18 @@ ion-img {
 
 .price {
   font-size: 14px;
-  color: #38bdf8;
-  text-shadow: 0 0 6px #38bdf8;
+  color: #00eaff;
+  text-shadow: 0 0 6px #00eaff;
   margin-bottom: 8px;
 }
 
-/* Neon Button */
-.btn-neon {
+/* Button */
+.neon-button {
   --background: transparent;
-  --color: #38bdf8;
-  border: 1px solid #38bdf8;
+  --color: #00eaff;
+  border: 1px solid #00eaff;
   border-radius: 10px;
-  text-shadow: 0 0 6px #38bdf8;
-  box-shadow: 0 0 10px rgba(56,189,248,0.6);
+  text-shadow: 0 0 6px #00eaff;
+  box-shadow: 0 0 12px #00eaff70;
 }
 </style>

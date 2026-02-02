@@ -1,55 +1,60 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from '@ionic/vue-router'
+import { createRouter, createWebHistory } from '@ionic/vue-router'
 import MainLayout from '@/layouts/MainLayout.vue'
 
-// Pages
-import PostsPage from '../views/PostsPage.vue'
-import CameraPage from '../views/CameraPage.vue'
-import LocationPage from '../views/LocationPage.vue'
-
-const routes: Array<RouteRecordRaw> = [
+const routes = [
   {
     path: '/',
     component: MainLayout,
     children: [
-      // 👉 เปิดแอปมาเจอ CameraPage
+      { path: '', redirect: '/home' },
+
       {
-        path: '',
-        redirect: '/camera'
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/core/homepage.vue')
       },
 
-      // Camera Page
+      {
+        path: 'product',
+        name: 'Product',
+        component: () => import('@/views/core/product.vue')
+      },
+
+      {
+        path: 'product/:id',
+        name: 'ProductDetail',
+        component: () => import('@/views/core/detailpage.vue'),
+        props: true
+      },
+
+      {
+        path: 'notes',
+        name: 'Notes',
+        component: () => import('@/views/NotePage.vue')
+      },
+
+      {
+        path: 'add-note',
+        name: 'AddNote',
+        component: () => import('@/views/AddNotePage.vue')
+      },
+
       {
         path: 'camera',
         name: 'Camera',
-        component: CameraPage
+        component: () => import('@/views/CameraPage.vue')
       },
 
-      // Location Page
       {
         path: 'location',
         name: 'Location',
-        component: LocationPage
+        component: () => import('@/views/LocationPage.vue')
       },
 
-      // Posts Page
-      {
-        path: 'posts',
-        name: 'Posts',
-        component: PostsPage
-      },
-
-      // หน้าอื่น ๆ
-      {
-        path: 'home',
-        component: () => import('../views/core/homepage.vue')
-      },
-      {
-        path: 'product',
-        component: () => import('../views/core/product.vue')
-      },
       {
         path: 'contact',
-        component: () => import('../views/core/contact.vue')
+        name: 'Contact',
+        component: () => import('@/views/core/contact.vue')
       }
     ]
   }

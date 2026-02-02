@@ -1,33 +1,38 @@
 <template>
-  <ion-split-pane content-id="main-content">
-    <!-- Side Menu -->
-    <ion-menu content-id="main-content" type="overlay">
-      <ion-content>
-        <ion-list>
-          <ion-list-header>My App</ion-list-header>
+  <ion-page>
+    <ion-split-pane content-id="main-content">
 
-          <ion-menu-toggle
-            v-for="(page, i) in appPages"
-            :key="i"
-            auto-hide="false"
-          >
-            <ion-item
-              :router-link="page.url"
-              router-direction="root"
-              :class="{ selected: route.path === page.url }"
-              lines="none"
+      <!-- Side Menu -->
+      <ion-menu content-id="main-content" type="overlay">
+        <ion-content>
+          <ion-list>
+            <ion-list-header>My App</ion-list-header>
+
+            <ion-menu-toggle
+              v-for="(page, i) in appPages"
+              :key="i"
+              auto-hide="false"
             >
-              <ion-icon slot="start" :icon="page.icon" />
-              <ion-label>{{ page.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
+              <ion-item
+                :router-link="page.url"
+                router-direction="root"
+                :class="{ selected: route.path === page.url }"
+                lines="none"
+              >
+                <ion-icon slot="start" :icon="page.icon" />
+                <ion-label>{{ page.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
 
-    <!-- Main Content -->
-    <ion-router-outlet id="main-content" />
-  </ion-split-pane>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+
+      <!-- Main Content -->
+      <ion-router-outlet id="main-content" />
+
+    </ion-split-pane>
+  </ion-page>
 </template>
 
 <script setup lang="ts">
@@ -63,6 +68,11 @@ const appPages = [
   {
     title: 'Cantact',
     url: '/Contact',
+    icon: cubeOutline,
+  },
+  {
+    title: 'addpage',
+    url: '/addpage',
     icon: cubeOutline,
   }
 ]
